@@ -223,7 +223,7 @@ var app = new Vue({
     bmi_value: null,
     bmi_size: null,
     calorie_require: null,
-    page: 4,
+    page: 1,
     data2: [
       {
         title: "ทูน่าสลัด",
