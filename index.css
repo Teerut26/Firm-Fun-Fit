@@ -1,0 +1,54 @@
+@import url('https://fonts.googleapis.com/css2?family=Itim&display=swap');
+*{
+    font-family: 'Itim', cursive;
+}
+.text-new{
+    white-space:pre-wrap;
+}
+
+body{
+    background-color: #ECE2E1;
+    color: #4b4b4b
+}
+.btn-new{
+    background-color: #FCD1D1;
+    color: #4b4b4b
+}
+
+.btn-new:hover{
+    background-color: #dbb8b8;
+    color: #4b4b4b
+}
+
+.btn-new:focus{
+    background-color: #dbb8b8;
+    color: #4b4b4b
+}
+
+.bg-new{
+    background-color: #FCD1D1;
+}
+
+.border-1{
+    border: 1px solid #4b4b4b;
+}
+
+.input-new{
+    background-color: #ECE2E1;
+}
+
+::-webkit-scrollbar{
+	width: 5px;
+}
+
+::-webkit-scrollbar-track-piece{
+	background-color: rgba(255, 255, 255, 0);
+}
+
+::-webkit-scrollbar-thumb{
+	background-color: #aee1e165;
+}
+
+::-webkit-scrollbar-thumb:hover{
+	background-color: #909090;
+}
