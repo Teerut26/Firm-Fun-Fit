@@ -38,7 +38,7 @@ body{
 }
 
 .bg-image{
-    background-image: url("https://exchange.foodcourt.finance/images/pattern2.png")
+    background-image: url("./images/pattern2.png")
 }
 
 ::-webkit-scrollbar{
