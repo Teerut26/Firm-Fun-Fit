@@ -24,20 +24,7 @@
     <div id="app" class="h-screen w-full flex justify-center items-center">
       <div
         v-if="page === 1"
-        class="
-          w-96
-          shadow-2xl
-          border-0
-          rounded-2xl
-          p-3
-          flex flex-col
-          justify-center
-          items-center
-          gap-3
-          mx-2
-          md:mx-0
-          bg-new
-        "
+        class="w-96 shadow-2xl border-0 rounded-2xl p-3 flex flex-col justify-center items-center gap-3 mx-2 md:mx-0 bg-new"
       >
         <div class="text-2xl font-bold">{{ title }}</div>
         <div class="flex flex-col gap-2">
@@ -46,7 +33,7 @@
             <input
               v-model="height"
               type="number"
-              class="form-control rounded-2xl border-1  "
+              class="form-control rounded-2xl border-1"
             />
           </div>
           <div>
@@ -54,34 +41,18 @@
             <input
               v-model="weight"
               type="number"
-              class="form-control rounded-2xl border-1 "
+              class="form-control rounded-2xl border-1"
+              v-on:keyup.enter="bmiSubmit"
             />
           </div>
         </div>
-        <div
-          v-on:click="bmiSubmit"
-          class="btn  rounded-2xl border-1 btn-new"
-        >
+        <div v-on:click="bmiSubmit" class="btn rounded-2xl border-1 btn-new">
           คำนวณ BMI
         </div>
       </div>
       <div
         v-if="page === 2"
-        class="
-          relative
-          w-96
-          shadow-2xl
-          border-0
-          rounded-2xl
-          p-3
-          flex flex-col
-          justify-center
-          items-center
-          gap-3
-          mx-2
-          md:mx-0
-          bg-new
-        "
+        class="relative w-96 shadow-2xl border-0 rounded-2xl p-3 flex flex-col justify-center items-center gap-3 mx-2 md:mx-0 bg-new"
       >
         <div
           v-on:click="page = 1"
@@ -124,95 +95,287 @@
       </div>
       <div
         v-if="page === 3"
-        class="
-          relative
-          w-96
-          shadow-2xl
-          border-0
-          rounded-2xl
-          p-3
-          flex flex-col
-          justify-center
-          items-center
-          gap-3
-          mx-2
-          md:mx-0
-          bg-new
-        "
+        class="relative w-96 shadow-2xl border-0 rounded-2xl p-3 flex flex-col justify-center items-center gap-3 mx-2 md:mx-0 bg-new"
       >
         <div
           v-on:click="changPage(2,'Firm Fun Fit')"
-          class="absolute top-3 left-1 rounded-full px-3"
+          class="absolute top-3 start-0 rounded-full px-3"
         >
           <i class="fas fa-chevron-left"></i>
         </div>
+        <div
+          v-on:click="randomSetFood()"
+          class="absolute top-3 end-0 rounded-full px-3"
+        >
+          <i class="fas fa-sync-alt"></i>
+        </div>
         <div class="text-2xl font-bold">{{ title }}</div>
-        <div class="flex flex-col gap-2 w-full overflow-auto h-96">
-          <div class="border-1 rounded-full py-2 px-3 flex justify-between items-center " v-for="(item,index) in data1" :key="index">
-            <div class="flex justify-center items-center gap-2">
-              <i class="fas fa-utensils"></i> 
-              <div>{{item.title}}</div>
+        <div
+          v-if="type_set_food === 'BMI<24'"
+          class="flex flex-col gap-2 w-full overflow-auto h-96 gap-3"
+        >
+          <div>
+            <div class="text-2xl">มื้อเช้า</div>
+            <div
+              class="pl-5"
+              v-for="(breakfast_item,breakfast_index) in muscle_building_food_set.bmi24[randomNumber].breakfast"
+              :key="breakfast_index"
+            >
+              {{breakfast_item}}
             </div>
-            <div>{{item.cal}}</div>
+          </div>
+          <div>
+            <div class="text-2xl">มื้อกลางวัน</div>
+            <div
+              class="pl-5"
+              v-for="(lunch_item,lunch_index) in muscle_building_food_set.bmi24[randomNumber].lunch"
+              :key="lunch_index"
+            >
+              {{lunch_item}}
+            </div>
+          </div>
+          <div>
+            <div class="text-2xl">มื้อเย็น</div>
+            <div
+              class="pl-5"
+              v-for="(dinner_item,dinner_index) in muscle_building_food_set.bmi24[randomNumber].dinner"
+              :key="dinner_index"
+            >
+              {{dinner_item}}
+            </div>
+          </div>
+          <div>
+            <div class="text-2xl">
+              รวม {{muscle_building_food_set.bmi24[randomNumber].calorie_total}}
+              cal
+            </div>
+          </div>
+        </div>
+
+        <div
+          v-if="type_set_food === 'BMI<18-24'"
+          class="flex flex-col gap-2 w-full overflow-auto h-96 gap-3"
+        >
+          <div>
+            <div class="text-2xl">มื้อเช้า</div>
+            <div
+              class="pl-5"
+              v-for="(breakfast_item,breakfast_index) in muscle_building_food_set.bmi1824[randomNumber].breakfast"
+              :key="breakfast_index"
+            >
+              {{breakfast_item}}
+            </div>
+          </div>
+          <div>
+            <div class="text-2xl">มื้อกลางวัน</div>
+            <div
+              class="pl-5"
+              v-for="(lunch_item,lunch_index) in muscle_building_food_set.bmi1824[randomNumber].lunch"
+              :key="lunch_index"
+            >
+              {{lunch_item}}
+            </div>
+          </div>
+          <div>
+            <div class="text-2xl">มื้อเย็น</div>
+            <div
+              class="pl-5"
+              v-for="(dinner_item,dinner_index) in muscle_building_food_set.bmi1824[randomNumber].dinner"
+              :key="dinner_index"
+            >
+              {{dinner_item}}
+            </div>
+          </div>
+          <div>
+            <div class="text-2xl">
+              รวม
+              {{muscle_building_food_set.bmi1824[randomNumber].calorie_total}}
+              cal
+            </div>
+          </div>
+        </div>
+
+        <div
+          v-if="type_set_food === 'BMI<18'"
+          class="flex flex-col gap-2 w-full overflow-auto h-96 gap-3"
+        >
+          <div>
+            <div class="text-2xl">มื้อเช้า</div>
+            <div
+              class="pl-5"
+              v-for="(breakfast_item,breakfast_index) in muscle_building_food_set.bmi18[randomNumber].breakfast"
+              :key="breakfast_index"
+            >
+              {{breakfast_item}}
+            </div>
+          </div>
+          <div>
+            <div class="text-2xl">มื้อกลางวัน</div>
+            <div
+              class="pl-5"
+              v-for="(lunch_item,lunch_index) in muscle_building_food_set.bmi18[randomNumber].lunch"
+              :key="lunch_index"
+            >
+              {{lunch_item}}
+            </div>
+          </div>
+          <div>
+            <div class="text-2xl">มื้อเย็น</div>
+            <div
+              class="pl-5"
+              v-for="(dinner_item,dinner_index) in muscle_building_food_set.bmi18[randomNumber].dinner"
+              :key="dinner_index"
+            >
+              {{dinner_item}}
+            </div>
+          </div>
+          <div>
+            <div class="text-2xl">
+              รวม {{muscle_building_food_set.bmi18[randomNumber].calorie_total}}
+              cal
+            </div>
           </div>
         </div>
       </div>
       <div
         v-if="page === 4"
-        class="
-          relative
-          w-96
-          shadow-2xl
-          border-0
-          rounded-2xl
-          p-3
-          flex flex-col
-          justify-center
-          items-center
-          gap-3
-          mx-2
-          md:mx-0
-          bg-new
-        "
+        class="relative w-96 shadow-2xl border-0 rounded-2xl p-3 flex flex-col justify-center items-center gap-3 mx-2 md:mx-0 bg-new"
       >
         <div
           v-on:click="changPage(2,'Firm Fun Fit')"
-          class="absolute top-3 left-1 rounded-full px-3"
+          class="absolute top-3 start-0 rounded-full px-3"
         >
           <i class="fas fa-chevron-left"></i>
         </div>
+        <div
+          v-on:click="randomSetFood()"
+          class="absolute top-3 end-0 rounded-full px-3"
+        >
+          <i class="fas fa-sync-alt"></i>
+        </div>
         <div class="text-2xl font-bold">{{ title }}</div>
-        
-        <div class="flex flex-col gap-2 w-full overflow-auto h-96 gap-3">
+
+        <div
+          v-if="type_set_food === 'BMI<24'"
+          class="flex flex-col gap-2 w-full overflow-auto h-96 gap-3"
+        >
           <div>
             <div class="text-2xl">มื้อเช้า</div>
-            <div class="pl-5">
-              ข้าวต้มกุ้งน้ำส้ม + น้ำส้ม 240 cal
-            </div>
-            <div class="pl-5">
-              สลัด 150 cal
+            <div
+              class="pl-5"
+              v-for="(breakfast_item,breakfast_index) in fat_enhancing_food.bmi24[randomNumber].breakfast"
+              :key="breakfast_index"
+            >
+              {{breakfast_item}}
             </div>
           </div>
           <div>
             <div class="text-2xl">มื้อกลางวัน</div>
-            <div class="pl-5">
-              สุกกี้น้ำอกไก่ 350 cal
+            <div
+              class="pl-5"
+              v-for="(lunch_item,lunch_index) in fat_enhancing_food.bmi24[randomNumber].lunch"
+              :key="lunch_index"
+            >
+              {{lunch_item}}
             </div>
           </div>
           <div>
             <div class="text-2xl">มื้อเย็น</div>
-            <div class="pl-5">
-              ปลานึ่งนะมาว 155 cal
+            <div
+              class="pl-5"
+              v-for="(dinner_item,dinner_index) in fat_enhancing_food.bmi24[randomNumber].dinner"
+              :key="dinner_index"
+            >
+              {{dinner_item}}
             </div>
           </div>
-          
-          <!-- <div class="border-1 rounded-full py-2 px-3 flex justify-between items-center " v-for="(item,index) in data2" :key="index">
-            <div class="flex justify-center items-center gap-2">
-              <i class="fas fa-utensils"></i> 
-              <div>{{item.title}}</div>
+          <div>
+            <div class="text-2xl">
+              รวม {{fat_enhancing_food.bmi24[randomNumber].calorie_total}} cal
             </div>
-            <div>{{item.cal}}</div>
-          </div> -->
+          </div>
+        </div>
+
+        <div
+          v-if="type_set_food === 'BMI<18-24'"
+          class="flex flex-col gap-2 w-full overflow-auto h-96 gap-3"
+        >
+          <div>
+            <div class="text-2xl">มื้อเช้า</div>
+            <div
+              class="pl-5"
+              v-for="(breakfast_item,breakfast_index) in fat_enhancing_food.bmi1824[randomNumber].breakfast"
+              :key="breakfast_index"
+            >
+              {{breakfast_item}}
+            </div>
+          </div>
+          <div>
+            <div class="text-2xl">มื้อกลางวัน</div>
+            <div
+              class="pl-5"
+              v-for="(lunch_item,lunch_index) in fat_enhancing_food.bmi1824[randomNumber].lunch"
+              :key="lunch_index"
+            >
+              {{lunch_item}}
+            </div>
+          </div>
+          <div>
+            <div class="text-2xl">มื้อเย็น</div>
+            <div
+              class="pl-5"
+              v-for="(dinner_item,dinner_index) in fat_enhancing_food.bmi1824[randomNumber].dinner"
+              :key="dinner_index"
+            >
+              {{dinner_item}}
+            </div>
+          </div>
+          <div>
+            <div class="text-2xl">
+              รวม {{fat_enhancing_food.bmi1824[randomNumber].calorie_total}} cal
+            </div>
+          </div>
+        </div>
+
+        <div
+          v-if="type_set_food === 'BMI<18'"
+          class="flex flex-col gap-2 w-full overflow-auto h-96 gap-3"
+        >
+          <div>
+            <div class="text-2xl">มื้อเช้า</div>
+            <div
+              class="pl-5"
+              v-for="(breakfast_item,breakfast_index) in fat_enhancing_food.bmi18[randomNumber].breakfast"
+              :key="breakfast_index"
+            >
+              {{breakfast_item}}
+            </div>
+          </div>
+          <div>
+            <div class="text-2xl">มื้อกลางวัน</div>
+            <div
+              class="pl-5"
+              v-for="(lunch_item,lunch_index) in fat_enhancing_food.bmi18[randomNumber].lunch"
+              :key="lunch_index"
+            >
+              {{lunch_item}}
+            </div>
+          </div>
+          <div>
+            <div class="text-2xl">มื้อเย็น</div>
+            <div
+              class="pl-5"
+              v-for="(dinner_item,dinner_index) in fat_enhancing_food.bmi18[randomNumber].dinner"
+              :key="dinner_index"
+            >
+              {{dinner_item}}
+            </div>
+          </div>
+          <div>
+            <div class="text-2xl">
+              รวม {{fat_enhancing_food.bmi18[randomNumber].calorie_total}} cal
+            </div>
+          </div>
         </div>
       </div>
     </div>
